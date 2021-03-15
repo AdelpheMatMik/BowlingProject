@@ -4,8 +4,8 @@ import java.util.List;
 public class BowlingImplements implements IBowling {
 	
 	 private final List<Frame> frames;
-     private static final int MAX_FRAMES = 10;
-     private static final int MAX_PINS = 10;
+     private static final int MAX_FRAMES = 10; //There are 10 frames in a match
+     private static final int MAX_PINS = 10;  //There are 10 pins in a frame
      private static final int MAX_ATTEMPTS_PER_FRAME = 2;
      private int frameCounter = 0;
      private int strikeCounter = 0;
@@ -77,7 +77,25 @@ public class BowlingImplements implements IBowling {
 
          return frame;
      }
+     
+     
+  /**
+   If in 2 tries, the bowler knocks down all the pins, it is 
+   a spare. The scoring of a spare 
+     is the sum of the number of pins knocked down plus 
+     the number of pins knocked down in the next bowl.
+     
+     E.g, if a bowler rolls, 4,6 | 5,0, then their score is 20 = (4 + 6 + 5) + (5 + 0).
+	*/
+     
+  /**
+   * If in one try, the bowler knocks down all the pins, it is a strike. 
+   * The scoring of a strike is the sum of the number of pins knocked down
+   *  plus the number of pins knocked down in the next two bowls.
 
+	E.g, if a bowler rolls, 10 | 5, 4, then their score is 28 = (10 + 5 + 4) + (5 + 4).
+   
+   */
 
  @Override
  public int score() {
@@ -182,7 +200,9 @@ public class BowlingImplements implements IBowling {
          noAttempts++;
      }
 
-     private int score() { return scores[0] + scores[1];}
+     private int score() { 
+    	 return scores[0] + scores[1];
+    }
 
      private int getFirstScore() {
          return scores[0];
